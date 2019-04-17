@@ -8,5 +8,5 @@ console.log("Hello World");
 document.querySelector('h1').textContent = "Hello World!";
 
 var naam = 'Raekwon Gerold';
-    naam = 'Waarom moet dit nou?';
+naam = 'Waarom moet dit nou?';
 document.querySelector('h1').textContent = naam;

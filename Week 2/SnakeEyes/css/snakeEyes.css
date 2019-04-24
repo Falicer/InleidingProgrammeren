@@ -7,3 +7,16 @@ img{
     margin-right: auto;
     display: block;
 }
+.throw{
+    animation: throw 0.5s ease-out;
+}
+@keyframes throw{
+  0%{
+    transform: translateX(-500px) rotate(-300deg);
+    opacity: 0
+   }
+ 100%{
+    transform: translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+}

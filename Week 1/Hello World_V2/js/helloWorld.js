@@ -11,10 +11,12 @@ var naam = 'Raekwon Gerold';
 naam = 'Waarom moet dit nou?';
 //document.querySelector('h1').textContent = naam;
 
-function verwerkFormulier(event){
+function verwerkFormulier(event) {
+    document.querySelector('form').classList.add("trigger_form_animation");
+    document.querySelector('h1').classList.add("trigger_h1_animation");
     event.preventDefault();
     console.log(document.querySelector('input').value);
-    document.querySelector('h1').textContent = "Hello "+document.querySelector('input').value;
+    document.querySelector('h1').textContent = "Hello " + document.querySelector('input').value;
 }
 
-document.querySelector('form').addEventListener('submit',verwerkFormulier);
+document.querySelector('form').addEventListener('submit', verwerkFormulier);

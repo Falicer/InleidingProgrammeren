@@ -1,19 +1,68 @@
-* {
+html{
     background-color: black;
     color: greenyellow;
-    text-align: center;
     font-family: 'VT323', monospace;
+    text-align: center;
 }
 
 form{
     font-size: 2em;
-    margin: 0px auto;
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
 }
 
-input, button{
+button, input{
     background-color: green;
+    border: none;
     color: black;
     padding: 1em;
-    border: none;
+}
+h1{
+    border-right: .1em solid lime;
+    width: 15ch; /*width 15 characters*/
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 40vh auto;
+}
+
+@keyframes turn-off {
+    0% {
+        transform: scale(1, 1) translate3d(0, 0, 0);
+        opacity: 1;
+    }
+    25% {
+        transform: scale(1, 0.09) translate3d(0, 0, 0);
+        opacity: 1;
+        background: lime;
+    }
+    50% {
+        transform: scale(1, 0.01) translate3d(0, 0, 0);
+    }
+    75% {
+        transform: scale(0.1, 0.1) translate3d(0, 0, 0);
+    }
+    100% {
+        transform: scale(0, 0) translate3d(0, 0, 0);
+    }
+}
+.trigger_form_animation {
+    animation: turn-off 0.5s ease-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+}
+
+@keyframes blink-caret {
+    50% {
+        border-color: transparent;
+    }
+}
+
+.trigger_h1_animation {
+    animation: typing 2s steps(14, end), blink-caret .2s step-end infinite alternate;
 }

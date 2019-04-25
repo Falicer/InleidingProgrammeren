@@ -1,0 +1,95 @@
+/* Copyleft 2015*/
+/* D. de Vries*/
+
+/*
+images courtesy of:
+    http://codemonkeyplanet.com
+    Open Clip Art Library user rg1024
+    http://www.freepik.com/free-vector/jungle-animals-set_719884.htm
+    http://www.habboxwiki.com/File:Space_teleporter.gif
+
+sfx courtesy of:
+    Mike Koenig and is from SoundBilble.com
+
+*/
+
+@import url(http://fonts.googleapis.com/css?family=Lato:400,700);
+
+* {
+    margin-top: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+
+body{
+    background: #A2D4B1 url('../img/bg-pattern.png') top center;
+    font-family: 'Lato', sans-serif;
+    color: #fff;
+    margin: auto;
+    overflow: auto;
+    text-align: center;
+    max-width: 2000px;
+    user-select: none;
+}
+
+main{
+    background: linear-gradient(to bottom, rgba(162,212,177,1) 0%,rgba(162,212,177,1) 87%,rgba(162,212,177,0) 100%);
+    margin: 6em;
+    padding: 2em;
+    min-width: 1100px;
+    min-height: 75vh;
+}
+
+header, main, footer, article, nav, section,  aside, figure, textarea {
+    display:block;
+}
+
+h1{
+    font-size: 4em;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+#speler1{
+    bottom: 30vh;
+    left: 300px;
+}
+
+#speler2{
+    bottom: 30vh;
+    left: 450px;
+}
+
+/* class to trigger jump animation on element */
+.jump{
+	-webkit-animation: jump 0.5s ease-out;
+}
+
+/* keyframes for jump animation */
+@-webkit-keyframes jump{
+  0%   { transform: translateY(0) }
+  50% { transform: translateY(-15vh)}
+  100% { transform: translateY(0)}	
+}
+
+.pion{
+    position: absolute;
+    width: 45px;
+    opacity: 1;
+    transform: scaleX(1);
+    transition: left 0.3s ease-out 0.5s, opacity 1s ease-out 0.8s, transform 1s ease-out 0.8s;
+    z-index: 1;
+}
+
+
+
+

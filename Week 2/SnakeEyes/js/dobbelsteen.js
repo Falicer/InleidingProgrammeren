@@ -9,10 +9,9 @@ var imgArray = ["one.png", "two.png", "three.png", "four.png", "five.png", "six.
 var dobbelsteenImg;
 var dobbelGeluid;
     dobbelGeluid = new Audio("sfx/shake_dice.mp3");
-var throwRemoval
-
+var throwRemoval;
 function classDelete(){
-    document.querySelector("img").classList.remove("throw")
+    document.querySelector("img").classList.remove("throw");
 }
 
 function werp(){

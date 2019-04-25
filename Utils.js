@@ -5,6 +5,7 @@
 /*eslint 'no-console': 0*/
 
 //Cheatsheet
+//Wordt nog verder uitgewerkt na maten ik verder ben met huiswerk
 
 ////Variables////
 var variable; //Variable aanmakken

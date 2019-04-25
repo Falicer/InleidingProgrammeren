@@ -1,0 +1,19 @@
+* {
+    background-color: black;
+    color: greenyellow;
+    text-align: center;
+    font-family: 'VT323', monospace;
+}
+
+form{
+    font-size: 2em;
+    margin: 0px auto;
+    text-align: center;
+}
+
+input, button{
+    background-color: green;
+    color: black;
+    padding: 1em;
+    border: none;
+}

@@ -9,6 +9,11 @@ var imgArray = ["one.png", "two.png", "three.png", "four.png", "five.png", "six.
 var dobbelsteenImg;
 var dobbelgeluid;
 dobbelgeluid = new Audio("sfx/shake_dice.mp3");
+var throwRemoval
+
+function classDelete(){
+    document.querySelector("img").classList.remove("throw")
+}
 
 function werp(){
     document.querySelector("img").classList.add("throw");
@@ -16,6 +21,7 @@ function werp(){
     dobbelsteenImg = imgArray[rolgetal];
     dobbelgeluid.play();
     document.querySelector("img").src = "images/" + dobbelsteenImg;
+    throwRemoval = setTimeout(classDelete, 500);
 }
 
 document.querySelector("img").addEventListener("click", werp);

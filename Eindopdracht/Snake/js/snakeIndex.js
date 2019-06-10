@@ -5,6 +5,7 @@ var game;
 var state = 1;
 var beginScherm = 0;
 var singlePlayer = 1;
+var firstMove;
 
 //Images&Sounds load
 var appleImage = new Image();
@@ -128,6 +129,11 @@ function snake1Player() {
     snake1X = snake1[0].x;
     snake1Y = snake1[0].y;
 
+    if (firstMove == "") {
+        snake1X += square;
+        firstMove = "set";
+    }
+
     if (player1Pressed == "LEFT") {
         snake1X -= square;
     }
@@ -197,7 +203,8 @@ function appleSpawner() {
 
 //collision detector
 function zelfCollision(playerActive, samePlayer) {
-    for (var k = 0; k < samePlayer.length; k++) {
+    //k is 2 omdat er anders op spawn collision is
+    for (var k = 2; k < samePlayer.length; k++) {
         if (playerActive.x == samePlayer[k].x &&
             playerActive.y == samePlayer[k].y) {
             return true;
@@ -217,14 +224,14 @@ function collisionEnemy(playerActive, otherPlayer) {
 }
 
 function wallCollision1() {
-    if (snake1X < square || snake1Y < 3 * square || snake1X > 17 * square || snake1Y > 17 * square || zelfCollision(nieuwHoofdSnake1, snake1) || collisionEnemy(nieuwHoofdSnake1, snake2)) {
+    if (snake1X < square || snake1Y < 3 * square || snake1X > 17 * square || snake1Y > 17 * square || zelfCollision(snake1[0], snake1) || collisionEnemy(snake1[0], snake2)) {
         clearInterval(game);
         deadSound.play();
     }
 }
 
 function wallCollision2() {
-    if (snake2X < square || snake2Y < 3 * square || snake2X > 17 * square || snake2Y > 17 * square || zelfCollision(nieuwHoofdSnake2, snake2) || collisionEnemy(nieuwHoofdSnake2, snake1)) {
+    if (snake2X < square || snake2Y < 3 * square || snake2X > 17 * square || snake2Y > 17 * square || zelfCollision(snake2[0], snake2) || collisionEnemy(snake2[0], snake1)) {
         clearInterval(game);
         deadSound.play();
     }
@@ -240,9 +247,17 @@ function snakeGame() {
     can.font = "40px Arial";
     can.fillText(score1, 1.7 * square, 1.5 * square);
 
+    //tekent appel2 image
+    can.drawImage(appleImage, canElement.width - 3.3 * square, 0.3 * square, 1.5 * square, 1.5 * square);
+    //Tekent score
+    can.fillStyle = "red";
+    can.font = "40px Arial";
+    can.fillText(score2, canElement.width - 1.7 * square, 1.5 * square);
+
+
     //Snake 1 box making
     snake1Player();
-    //snake2Player();
+    snake2Player();
 
     //Appel checker
     appelChecker();
@@ -251,7 +266,7 @@ function snakeGame() {
 
     //collision checker
     wallCollision1();
-    //wallCollision2();
+    wallCollision2();
 
 
 }

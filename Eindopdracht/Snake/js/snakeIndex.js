@@ -23,6 +23,7 @@ var snake1Y;
 var snake2 = [];
 var snake2X;
 var snake2Y;
+
 var score1 = 0;
 var score2 = 0;
 var player1Pressed;
@@ -184,6 +185,7 @@ function snake2Player() {
         y: snake2Y
     }
 
+
     //voegt nieuwe hoofd toe
     snake2.unshift(nieuwHoofdSnake2);
 }
@@ -240,6 +242,7 @@ function snakeGame() {
 
     //Snake 1 box making
     snake1Player();
+    snake2Player();
 
     //Appel checker
     appelChecker();
@@ -250,6 +253,7 @@ function snakeGame() {
     wallCollision1();
     wallCollision2();
 
+
 }
 //Tekent de elementen
 function draw() {
@@ -257,9 +261,9 @@ function draw() {
     can.fillStyle = "#013220";
     can.fillRect(0, 0, canElement.width, canElement.height);
     can.fillStyle = "green";
-    can.fillRect(0, 100, canElement.width, canElement.height);
+    can.fillRect(0, 2 * square, canElement.width, canElement.height);
     can.fillStyle = "#BFFF00";
-    can.fillRect(1 * square, 4 * square, 17 * square, 14 * square);
+    can.fillRect(1 * square, 3 * square, 17 * square, 15 * square);
 
 
 

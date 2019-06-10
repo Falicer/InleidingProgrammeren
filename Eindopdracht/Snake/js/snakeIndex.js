@@ -242,7 +242,7 @@ function snakeGame() {
 
     //Snake 1 box making
     snake1Player();
-    snake2Player();
+    //snake2Player();
 
     //Appel checker
     appelChecker();
@@ -251,7 +251,7 @@ function snakeGame() {
 
     //collision checker
     wallCollision1();
-    wallCollision2();
+    //wallCollision2();
 
 
 }

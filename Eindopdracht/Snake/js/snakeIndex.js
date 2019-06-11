@@ -21,7 +21,7 @@ var can = canElement.getContext("2d");
 var game;
 
 //var gamestates
-var state = 1;
+var state = 0;
 var beginScherm = 0;
 var singlePlayer = 1;
 var dualPlayer = 2;
@@ -69,11 +69,11 @@ snake1[1] = {
 //Spawn declare snake2
 snake2[0] = {
     x: 9 * square,
-    y: 13 * square
+    y: 15 * square
 };
 snake2[1] = {
     x: 8 * square,
-    y: 13 * square
+    y: 15 * square
 };
 
 //food spawner
@@ -113,15 +113,30 @@ function player2Keys() {
         }
     }
 }
+//Homescreen keys
+function homescreenKeys() {
+    document.addEventListener("keydown", direction);
 
+    function direction(event) {
+        if (event.keyCode == 38 && state == 0 && player1Pressed != "DOWN") {
+            player1Pressed = "UP";
+            state = 1;
+        } else if (event.keyCode == 40 && state == 0 && player1Pressed != "UP") {
+            player1Pressed = "DOWN";
+            state = 2;
+        }
+    }
+}
 //First test homescreen panel
-function startScherm(){
+function startScherm() {
     //Tekent startscherm tekst
     can.fillStyle = "White";
     can.font = "50px Verdana";
     can.fillText("Snake game", 5 * square, canElement.height / 2);
 
-    can.fillStyle = "";
+    can.font = "35px Verdana";
+    can.fillText("Press up key for single player", 1.5 * square, canElement.height / 2 + 2 * square);
+    can.fillText("Press down key for dual player", 1 * square, canElement.height / 2 + 3.5 * square);
 }
 
 //Appel eat check
@@ -322,7 +337,7 @@ function dualPlayerGame() {
     can.fillText(score2, canElement.width - 1.7 * square, 1.5 * square);
 
 
-    //Snake 1 box making
+    //Snakes box making
     snake1Player();
     snake2Player();
 
@@ -355,6 +370,7 @@ function draw() {
         case beginScherm:
             //Main Menu Stuff
             startScherm();
+            homescreenKeys();
             break;
         case singlePlayer:
             //Game Stuff
@@ -373,14 +389,12 @@ function draw() {
 
 }
 //Op basis van game scherm/state een ander framerate
-function gameModeFramerate(){
-    if(state == 1){
+function gameModeFramerate() {
+    if (state == 1) {
         frameRate = setInterval(draw, 100);
-    }
-    else if(state == 2){
+    } else if (state == 2) {
         frameRate = setInterval(draw, 100);
-    }
-    else{
+    } else {
         frameRate = setInterval(draw, 100);
     }
 }

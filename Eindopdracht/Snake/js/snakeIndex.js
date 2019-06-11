@@ -8,14 +8,27 @@
 //Youtube filmpje van Code Explained:
 //https://www.youtube.com/watch?v=9TcU2C1AACw
 //
+
+/*jslint browser: true, devel: true, eqeq: true, plusplus: true, sloppy: true, vars: true, white: true*/
+
+/*eslint-env browser*/
+
+/*eslint 'no-console': 0*/
+
 //Oppaken van canvas element en context defineren
 var canElement = document.getElementById("snakeGame");
 var can = canElement.getContext("2d");
 var game;
-var state = 1;
+
+//var gamestates
+var state = 0;
 var beginScherm = 0;
 var singlePlayer = 1;
+var dualPlayer = 2;
 var firstMove;
+
+//variables voor framerate test
+var frameRate;
 
 //Images&Sounds load
 var appleImage = new Image();
@@ -96,6 +109,16 @@ function player2Keys() {
             player2Pressed = "DOWN";
         }
     }
+}
+
+//First test homescreen panel
+function startScherm(){
+    //Tekent startscherm tekst
+    can.fillStyle = "White";
+    can.font = "50px Verdana";
+    can.fillText("Snake game", 5 * square, canElement.height / 2);
+
+    can.fillStyle = "";
 }
 
 //Appel eat check
@@ -211,7 +234,7 @@ function appleSpawner() {
     can.drawImage(appleImage, appel.x, appel.y, square, square);
 }
 
-//collision detector
+//Collision op jezelf checker
 function zelfCollision(playerActive, samePlayer) {
     //k is 2 omdat er anders op spawn collision is
     for (var k = 2; k < samePlayer.length; k++) {
@@ -222,7 +245,7 @@ function zelfCollision(playerActive, samePlayer) {
     }
     return false;
 }
-
+//Collision met enemy detector
 function collisionEnemy(playerActive, otherPlayer) {
     for (var j = 0; j < otherPlayer.length; j++) {
         if (playerActive.x == otherPlayer[j].x &&
@@ -232,7 +255,7 @@ function collisionEnemy(playerActive, otherPlayer) {
     }
     return false;
 }
-
+//Wall collision en player collision checkers
 function wallCollision1() {
     if (snake1X < square || snake1Y < 3 * square || snake1X > 17 * square || snake1Y > 17 * square || zelfCollision(snake1[0], snake1) || collisionEnemy(snake1[0], snake2)) {
         clearInterval(game);
@@ -247,8 +270,33 @@ function wallCollision2() {
     }
 }
 
-//Function voor het tekenen van de snake game
-function snakeGame() {
+//Function voor het tekenen en spelen van single player
+function singlePlayerGame() {
+
+    //tekent appel image
+    can.drawImage(appleImage, 0.3 * square, 0.3 * square, 1.5 * square, 1.5 * square);
+    //Tekent score
+    can.fillStyle = "red";
+    can.font = "40px Arial";
+    can.fillText(score1, 1.7 * square, 1.5 * square);
+
+    //Snake 1 box making
+    snake1Player();
+
+    //Appel checker
+    appelChecker();
+    //Spawnt randomized appel
+    appleSpawner();
+
+    //collision checker
+    wallCollision1();
+    wallCollision2();
+
+
+}
+
+//Dual play versie met 2 snakes
+function dualPlayerGame() {
 
     //tekent appel image
     can.drawImage(appleImage, 0.3 * square, 0.3 * square, 1.5 * square, 1.5 * square);
@@ -280,6 +328,7 @@ function snakeGame() {
 
 
 }
+
 //Tekent de elementen
 function draw() {
     //tekent zwarte achtergrond
@@ -296,10 +345,15 @@ function draw() {
     switch (state) {
         case beginScherm:
             //Main Menu Stuff
+            startScherm();
             break;
         case singlePlayer:
             //Game Stuff
-            snakeGame();
+            singlePlayerGame();
+            break;
+        case dualPlayer:
+            //dualplay selected
+            dualPlayerGame();
             break;
         default:
             //error
@@ -308,7 +362,18 @@ function draw() {
             break;
     }
 
-    snakeGame();
 }
+//Op basis van game scherm/state een ander framerate
+function gameModeFramerate(){
+    if(state == 1){
+        frameRate = setInterval(draw, 100);
+    }else if(state == 2){
+        frameRate = setInterval(draw, 150);
+    }
+    else{
+        frameRate = setInterval(draw, 100);
+    }
+}
+gameModeFramerate();
 //Framerate van het tekenen op het canvas
-game = setInterval(draw, 300);
+game = frameRate;

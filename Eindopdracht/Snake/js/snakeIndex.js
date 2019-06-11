@@ -376,8 +376,9 @@ function draw() {
 function gameModeFramerate(){
     if(state == 1){
         frameRate = setInterval(draw, 100);
-    }else if(state == 2){
-        frameRate = setInterval(draw, 150);
+    }
+    else if(state == 2){
+        frameRate = setInterval(draw, 100);
     }
     else{
         frameRate = setInterval(draw, 100);

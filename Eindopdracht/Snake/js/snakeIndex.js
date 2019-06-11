@@ -137,6 +137,10 @@ function startScherm() {
     can.font = "35px Verdana";
     can.fillText("Press up key for single player", 1.5 * square, canElement.height / 2 + 2 * square);
     can.fillText("Press down key for dual player", 1 * square, canElement.height / 2 + 3.5 * square);
+
+    can.font = "20px Verdana";
+    can.fillText("Player 1 controls: Arrow keys", 1.5 * square, 4 * square);
+    can.fillText("Player 2 controls: WASD keys", 1.5 * square, 4.8 * square);
 }
 
 //Appel eat check

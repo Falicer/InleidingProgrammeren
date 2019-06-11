@@ -21,7 +21,7 @@ var can = canElement.getContext("2d");
 var game;
 
 //var gamestates
-var state = 0;
+var state = 1;
 var beginScherm = 0;
 var singlePlayer = 1;
 var dualPlayer = 2;
@@ -52,6 +52,9 @@ var score1 = 0;
 var score2 = 0;
 var player1Pressed;
 var player2Pressed;
+
+var k;
+var j;
 
 //Spawn declare snake1
 snake1[0] = {
@@ -150,7 +153,7 @@ function snake1Player() {
     var i;
     for (i = 0; i < snake1.length; i++) {
         //Als index 0 = kleur = blauw anders zwart
-        can.fillStyle = (i == 0) ? "blue" : "white";
+        can.fillStyle = (i === 0) ? "blue" : "white";
         can.fillRect(snake1[i].x, snake1[i].y, square, square);
         //Kleuren randje
         can.strokeStyle = "red";
@@ -162,7 +165,7 @@ function snake1Player() {
     snake1X = snake1[0].x;
     snake1Y = snake1[0].y;
 
-    if (firstMove == "") {
+    if (firstMove === "") {
         snake1X += square;
         firstMove = "set";
     }
@@ -183,7 +186,7 @@ function snake1Player() {
     var nieuwHoofdSnake1 = {
         x: snake1X,
         y: snake1Y
-    }
+    };
 
     //voegt nieuwe hoofd toe
     snake1.unshift(nieuwHoofdSnake1);
@@ -194,7 +197,7 @@ function snake2Player() {
     var i;
     for (i = 0; i < snake2.length; i++) {
         //Als index 0 = kleur = blauw anders zwart
-        can.fillStyle = (i == 0) ? "yellow" : "white";
+        can.fillStyle = (i === 0) ? "yellow" : "white";
         can.fillRect(snake2[i].x, snake2[i].y, square, square);
         //Kleuren randje
         can.strokeStyle = "green";
@@ -222,7 +225,7 @@ function snake2Player() {
     var nieuwHoofdSnake2 = {
         x: snake2X,
         y: snake2Y
-    }
+    };
 
 
     //voegt nieuwe hoofd toe
@@ -237,7 +240,7 @@ function appleSpawner() {
 //Collision op jezelf checker
 function zelfCollision(playerActive, samePlayer) {
     //k is 2 omdat er anders op spawn collision is
-    for (var k = 2; k < samePlayer.length; k++) {
+    for (k = 2; k < samePlayer.length; k++) {
         if (playerActive.x == samePlayer[k].x &&
             playerActive.y == samePlayer[k].y) {
             return true;
@@ -247,7 +250,7 @@ function zelfCollision(playerActive, samePlayer) {
 }
 //Collision met enemy detector
 function collisionEnemy(playerActive, otherPlayer) {
-    for (var j = 0; j < otherPlayer.length; j++) {
+    for (j = 0; j < otherPlayer.length; j++) {
         if (playerActive.x == otherPlayer[j].x &&
             playerActive.y == otherPlayer[j].y) {
             return true;
@@ -256,6 +259,13 @@ function collisionEnemy(playerActive, otherPlayer) {
     return false;
 }
 //Wall collision en player collision checkers
+function wallCollisionSolo() {
+    if (snake1X < square || snake1Y < 3 * square || snake1X > 17 * square || snake1Y > 17 * square || zelfCollision(snake1[0], snake1) || collisionEnemy(snake1[0], snake2)) {
+        clearInterval(game);
+        deadSound.play();
+    }
+}
+
 function wallCollision1() {
     if (snake1X < square || snake1Y < 3 * square || snake1X > 17 * square || snake1Y > 17 * square || zelfCollision(snake1[0], snake1) || collisionEnemy(snake1[0], snake2)) {
         clearInterval(game);
@@ -289,8 +299,7 @@ function singlePlayerGame() {
     appleSpawner();
 
     //collision checker
-    wallCollision1();
-    wallCollision2();
+    wallCollisionSolo();
 
 
 }
@@ -337,7 +346,7 @@ function draw() {
     can.fillStyle = "green";
     can.fillRect(0, 2 * square, canElement.width, canElement.height);
     can.fillStyle = "#BFFF00";
-    can.fillRect(1 * square, 3 * square, 17 * square, 15 * square);
+    can.fillRect(square, 3 * square, 17 * square, 15 * square);
 
 
 

@@ -1,3 +1,13 @@
+//Bron van sommige stukken code:
+//Mijn eigen project van vorig jaar: Ticket To Paradise
+//http://www.mediafire.com/file/xoen06bvx2y581f/TTP+version+0.9+64-bit.zip
+//
+//Youtube filmpje van Chris DeLeon of Gamkedo
+//https://www.youtube.com/watch?v=xGmXxpIj6vs
+//
+//Youtube filmpje van Code Explained:
+//https://www.youtube.com/watch?v=9TcU2C1AACw
+//
 //Oppaken van canvas element en context defineren
 var canElement = document.getElementById("snakeGame");
 var can = canElement.getContext("2d");
@@ -300,4 +310,5 @@ function draw() {
 
     snakeGame();
 }
-game = setInterval(draw, 100);
+//Framerate van het tekenen op het canvas
+game = setInterval(draw, 300);
